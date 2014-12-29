@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="grid-2 gutter-10">
+    <div class="span-1"><h1>Draft</h1>
+    <table id="draft" class="flakes-table">
+    <thead>
+    <tr><td>Measure</td><td>Short Title</td></tr>
+    </thead>
+    <tbody>
+    {% for suff in draft %}
+        <tr><td><a href="{{suff.get_absolute_url}}">{{suff.measure_type}}{{suff.measure_number}}</a></td><td>{{suff.short_title}}</td></tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    </div>
+    <div class="span-1"><h1>Pending Review</h1>
+    <table id="draft" class="flakes-table">
+    <thead>
+    <tr><td>Measure</td><td>Short Title</td></tr>
+    </thead>
+    <tbody>
+    {% for suff in pending %}
+        <tr><td><a href="{{suff.get_absolute_url}}">{{suff.measure_type}}{{suff.measure_number}}</a></td><td>{{suff.short_title}}</td></tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    </div>
+</div>
+
+{% endblock %}
