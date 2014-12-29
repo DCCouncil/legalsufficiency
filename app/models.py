@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
+from redactor.fields import RedactorField
 
 # Create your models here.
 
@@ -24,7 +25,8 @@ class LegalSufficiency(models.Model):
     measure_number = models.CharField(max_length=64, null=True, blank=True)
     short_title = models.CharField(max_length=300, null=True, blank=True)
     status = models.CharField(max_length=10, choices=published, default='draft')
-    content = models.TextField(blank=True, null=True)
+    content = RedactorField(verbose_name=u'Content')
+
 
     def get_absolute_url(self):
         return '/suff/%s' % self.id

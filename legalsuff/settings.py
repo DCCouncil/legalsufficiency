@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrapform',
+    'redactor',
     'app',
 )
 
@@ -87,6 +88,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = ('/app/static/',)
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+REDACTOR_OPTIONS = {'lang': 'en'}
+REDACTOR_UPLOAD = 'uploads/'
 
 try:
   from local_settings import *

@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'^suff/$', 'app.views.new_legal_sufficiency', name='new_legal_sufficiency'),
     url(r'^suff/(?P<pk>[\w|-]+)/$', views.LegalSufficiencyUpdate.as_view(), name='suff-detail'),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
+    url(r'^redactor/', include('redactor.urls')), 
 )
