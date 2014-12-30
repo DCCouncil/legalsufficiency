@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 import uuid
 from redactor.fields import RedactorField
+from datetime import date
 
 # Create your models here.
 
@@ -26,9 +27,21 @@ class LegalSufficiency(models.Model):
     short_title = models.CharField(max_length=300, null=True, blank=True)
     status = models.CharField(max_length=10, choices=published, default='draft')
     content = RedactorField(verbose_name=u'Content')
+    publish_date = models.DateField(blank=True, null=True)
 
     def get_absolute_url(self):
         return '/suff/%s' % self.id
 
     def get_public_url(self):
         return '/view/%s' % self.id
+
+    def publish(self):
+        self.publish_date = date.today()
+        self.status = 'published'
+        self.save()
+        return True
+
+    class Meta:
+        permissions = ( 
+            ( "can_publish", "Can Publish LSDs" ),
+        )

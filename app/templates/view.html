@@ -26,4 +26,11 @@
 
 {% block extra_js %}
 <script src="{% static 'bower_components/datatables/media/js/jquery.dataTables.min.js' %}"></script>
+<script>
+$(document).ready(function(){
+    $('#draft').DataTable();
+    $('#pending').DataTable();
+    $('#approved').DataTable();
+});
+</script>
 {% endblock %}

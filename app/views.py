@@ -20,6 +20,10 @@ def view_sufficiencies(request):
     sufficiencies = LegalSufficiency.objects.all().filter(status='published')
     return render(request, 'view.html', {'sufficiencies':sufficiencies})
 
+def print_sufficiencies(request, pk):
+    sufficiency = LegalSufficiency.objects.get(id=pk)
+    return render(request, 'print.html', {'sufficiency':sufficiency})
+
 @login_required
 def new_legal_sufficiency(request):
     form = LegalSufficiencyForm()
@@ -33,7 +37,6 @@ def new_legal_sufficiency(request):
         return render(request,'app/new_legal_sufficiency.html', {'form':form, 'errors':form.errors})
     return render(request,'app/new_legal_sufficiency.html', {'form':form})
 
-
 class LegalSufficiencyUpdate(UpdateView):
     model = LegalSufficiency
     form_class = LegalSufficiencyForm
@@ -41,7 +44,10 @@ class LegalSufficiencyUpdate(UpdateView):
 
     def form_valid(self, form):
         self.document = form.save(commit=False)
-        self.document.attorney = self.request.user
+        if self.request.POST.get('status') == 'published' and self.request.user.has_perm('app.legal_sufficiency_can_publish'):
+            self.document.publish()
+        else:
+            self.document.status = 'review'
         self.document.save()
         return super(LegalSufficiencyUpdate, self).form_valid(form)
 

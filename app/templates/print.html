@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/print.css' %}" type="text/css" media="print" />
+<style type="text/css">
+
+div.header {
+    content:url(/static/img/dcseal.png);
+    display: block;
+    margin: 0 auto;
+}
+
+#front_matter {
+    font-weight: bold;
+    border-bottom: solid 1px;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="header"></div>
+<h1>Memorandum</h1>
+<div id="front_matter">
+<p>TO: {{sufficiency.get_office_display}}</p>
+<p>FROM: V. David Zvenyach, General Counsel</p>
+<p>DATE: {{sufficiency.publish_date|date:"F d, Y"}}</p>
+<p>RE: Legal Sufficiency Determination for {{sufficiency.get_measure_type}} {{sufficiency.measure_number}}, the {{sufficiency.short_title}}.</p>
+</div>
+
+{{sufficiency.content|safe}}
+
+</div>
+{% endblock %}

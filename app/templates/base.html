@@ -25,7 +25,7 @@
 	<![endif]-->
 
 	<div class="flakes-frame">
-		<div class="flakes-navigation">
+		<div class="flakes-navigation no-print">
 			<a href="/" class="logo">
 				<img src="{% static 'img/dcseal.png'%}" width="120">
 			</a>
@@ -39,20 +39,25 @@
 				<li><a href="/view">View Legal Sufficiencies</a></li>
 				<li><a href="#">Search</a></li>
 			</ul>
-
+{% if user.is_staff %}
 			<p class="foot">
-				Hello <b>John Doe</b><br>
-				<a href="">My Account</a> &bullet; <a href="">Logout</a>
+				Hello <b>{{user.username}}</b><br>
+				<a href="/admin/logout/">Logout</a>
 			</p>
+{% else %}
+			<p class="foot">
+				<a href="/admin/login/">Login</a>
+			</p>
+{% endif %}
 		</div>
 
 		<div class="flakes-content">
-			<div class="flakes-mobile-top-bar">
+			<div class="flakes-mobile-top-bar no-print">
 				<a href="" class="logo-wrap">
-					<img src="{% static 'img/dcseal.png'%}" height="30px">
+					<img class="no-print" src="{% static 'img/dcseal.png'%}" height="30px">
 				</a>
 				<a href="" class="navigation-expand-target">
-					<img src="{% static 'img/site-wide/navigation-expand-target.png'%}" height="26px">
+					<img class="no-print" src="{% static 'img/site-wide/navigation-expand-target.png'%}" height="26px">
 				</a>
 			</div>
 			<div class="view-wrap">
