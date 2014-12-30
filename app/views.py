@@ -17,12 +17,12 @@ def home(request):
 
 @login_required
 def new_legal_sufficiency(request):
+    form = LegalSufficiencyForm()
     if request.method == "POST":
         form = LegalSufficiencyForm(request.POST)
         if form.is_valid():
             document = form.save()
             return redirect('home')
-    form = LegalSufficiencyForm()
     return render(request,'app/new_legal_sufficiency.html', {'form':form})
 
 class LegalSufficiencyUpdate(UpdateView):

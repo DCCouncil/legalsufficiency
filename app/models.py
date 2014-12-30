@@ -20,7 +20,7 @@ class LegalSufficiency(models.Model):
     id = models.CharField(max_length=64, primary_key=True, default=str(uuid.uuid1()))
     # request = models.ForeignKey('Request', blank=True, null=True)
     office = models.CharField(max_length=400, choices=members, default='pm')
-    attorney = models.ForeignKey(User, unique=True, blank=True, null=True)
+    attorney = models.ForeignKey(User, blank=True, null=True)
     measure_type = models.CharField(max_length=5, choices=m_type, default='b')
     measure_number = models.CharField(max_length=64, null=True, blank=True)
     short_title = models.CharField(max_length=300, null=True, blank=True)
