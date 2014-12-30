@@ -2,15 +2,15 @@
 {% block content %}
 
 <h1>Legal Sufficiencies</h1>
-<div class="grid-2 gutter-10">
+<div class="grid-1">
     <div class="span-1"><h2>Draft</h2>
     <table id="draft" class="flakes-table">
     <thead>
-    <tr><td>Measure</td><td>Short Title</td></tr>
+    <tr><td>Measure</td><td>Short Title</td><td>Requesting Member</td></tr>
     </thead>
     <tbody>
     {% for suff in draft %}
-        <tr><td><a href="{{suff.get_absolute_url}}">{{suff.measure_type}}{{suff.measure_number}}</a></td><td>{{suff.short_title}}</td></tr>
+        <tr><td><a href="{{suff.get_absolute_url}}">{{suff.measure_type}}{{suff.measure_number}}</a></td><td>{{suff.short_title}}</td><td>{{suff.member}}</td></tr>
     {% endfor %}
     </tbody>
     </table>
@@ -18,11 +18,11 @@
     <div class="span-1"><h2>Pending Review</h2>
     <table id="draft" class="flakes-table">
     <thead>
-    <tr><td>Measure</td><td>Short Title</td></tr>
+    <tr><td>Measure</td><td>Short Title</td><td>Requesting Member</td></tr>
     </thead>
     <tbody>
     {% for suff in pending %}
-        <tr><td><a href="{{suff.get_absolute_url}}">{{suff.measure_type}}{{suff.measure_number}}</a></td><td>{{suff.short_title}}</td></tr>
+        <tr><td><a href="{{suff.get_absolute_url}}">{{suff.measure_type}}{{suff.measure_number}}</a></td><td>{{suff.short_title}}</td><td>{{suff.member}}</td></tr>
     {% endfor %}
     </tbody>
     </table>

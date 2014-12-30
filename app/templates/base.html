@@ -13,8 +13,10 @@
 	<meta name="apple-touch-fullscreen" content="yes">
 	<meta charset="UTF-8" />
 	<link rel="stylesheet" type="text/css" href="{% static 'css/all.css'%}">
+	{% block extra_css %}
 	<link rel="stylesheet" href="{% static 'bower_components/redactor/redactor/redactor.css' %}"/>
 	<script src="{% static 'bower_components/redactor/redactor/redactor.min.js' %}"></script>
+	{% endblock %}
 </head>
 
 <body>
@@ -31,7 +33,10 @@
 			<ul>
 				<li class="title">Navigation</li>
 				<li><a href="/">Home</a></li>
+				{% if user.is_staff %}
 				<li><a href="/suff">New Legal Sufficiency</a></li>
+				{% endif %}
+				<li><a href="/view">View Legal Sufficiencies</a></li>
 				<li><a href="#">Search</a></li>
 			</ul>
 
@@ -66,8 +71,9 @@
 	<script src="{% static 'bower_components/snapjs/snap.js' %}"></script>
 	<script src="{% static 'bower_components/responsive-elements/responsive-elements.js' %}"></script>
 	<script src="{% static 'bower_components/gridforms/gridforms/gridforms.js' %}"></script>
-
-
 	<script src="{% static 'js/base.js' %}"></script>
+	{% block extra_js %}
+
+	{% endblock %}
 </body>
 </html>

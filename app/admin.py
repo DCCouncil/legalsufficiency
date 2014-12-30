@@ -1,3 +1,6 @@
 from django.contrib import admin
+from app.models import LegalSufficiency
 
-# Register your models here.
+@admin.register(LegalSufficiency)
+class LegalSufficiencyAdmin(admin.ModelAdmin):
+    pass
