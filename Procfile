@@ -1,0 +1,1 @@
+web: gunicorn legalsuff.wsgi:application --log-file -
