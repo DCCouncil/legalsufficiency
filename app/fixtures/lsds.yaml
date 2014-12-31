@@ -1,0 +1,69 @@
+- model: app.LegalSufficiency
+  fields:
+    office: PM
+    attorney: null
+    measure_type: B
+    measure_number: 21-0001
+    short_title: First Act of 2015
+    content: "<p>First Act</p>"
+    status: review
+
+- model: app.LegalSufficiency
+  fields:
+    office: PM
+    attorney: null
+    measure_type: B
+    measure_number: 21-0002
+    short_title: Second Act of 2015
+    content: "<p>Second Act</p>"
+    status: review
+
+- model: app.LegalSufficiency
+  fields:
+    office: PM
+    attorney: null
+    measure_type: B
+    measure_number: 21-0003
+    short_title: Third Act of 2015
+    content: "<p>Third Act</p>"
+    status: draft
+
+- model: app.LegalSufficiency
+  fields:
+    office: PM
+    attorney: null
+    measure_type: B
+    measure_number: 21-0004
+    short_title: Fourth Act of 2015
+    content: "<p>Fourth Act</p>"
+    status: draft
+
+- model: app.LegalSufficiency
+  fields:
+    office: PM
+    attorney: null
+    measure_type: B
+    measure_number: 21-0005
+    short_title: Fifth Act of 2015
+    content: "<p>Fifth Act</p>"
+    status: draft
+
+- model: app.LegalSufficiency
+  fields:
+    office: PM
+    attorney: null
+    measure_type: B
+    measure_number: 21-0006
+    short_title: Sixth Act of 2015
+    content: "<p>Sixth Act</p>"
+    status: draft
+
+- model: app.LegalSufficiency
+  fields:
+    office: PM
+    attorney: null
+    measure_type: B
+    measure_number: 21-0007
+    short_title: Last Act of 2015
+    content: "<p>Last Act</p>"
+    status: draft
