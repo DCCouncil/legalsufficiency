@@ -40,12 +40,9 @@ def new_legal_sufficiency(request):
             document.attorney = request.user
             document.save()
             return redirect('home')
-        else:
-            print("Something went wrong")
         return render(request,'app/new_legal_sufficiency.html', {'form':form, 'errors':form.errors})
     return render(request,'app/new_legal_sufficiency.html', {'form':form})
 
-@login_required
 class LegalSufficiencyUpdate(UpdateView):
     model = LegalSufficiency
     form_class = LegalSufficiencyForm
@@ -60,6 +57,5 @@ class LegalSufficiencyUpdate(UpdateView):
         self.document.save()
         return super(LegalSufficiencyUpdate, self).form_valid(form)
 
-@login_required
 class LegalSufficiencyDelete(DeleteView):
     model = LegalSufficiency

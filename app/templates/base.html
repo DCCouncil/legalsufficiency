@@ -42,11 +42,11 @@
 {% if user.is_staff %}
 			<p class="foot">
 				Hello <b>{{user.username}}</b><br>
-				<a href="/admin/logout/">Logout</a>
+				<a href="/logout/">Logout</a>
 			</p>
 {% else %}
 			<p class="foot">
-				<a href="/admin/login/">Login</a>
+				<a href="/accounts/login/">Login</a>
 			</p>
 {% endif %}
 		</div>

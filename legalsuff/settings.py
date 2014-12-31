@@ -91,6 +91,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 REDACTOR_OPTIONS = {'lang': 'en'}
 REDACTOR_UPLOAD = 'uploads/'
 
+LOGIN_REDIRECT_URL = '/'
+
 try:
   from local_settings import *
 except:
