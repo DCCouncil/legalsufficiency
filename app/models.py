@@ -29,6 +29,9 @@ class LegalSufficiency(models.Model):
     content = RedactorField(verbose_name=u'Content')
     publish_date = models.DateField(blank=True, null=True)
 
+    def __str__(self):
+        return '%s%s: %s' % (self.measure_type, self.measure_number, self.short_title)
+
     def get_absolute_url(self):
         return '/suff/%s' % self.id
 
@@ -38,8 +41,6 @@ class LegalSufficiency(models.Model):
     def publish(self):
         self.publish_date = date.today()
         self.status = 'published'
-        self.save()
-        return True
 
     class Meta:
         permissions = ( 

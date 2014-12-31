@@ -31,6 +31,11 @@ def new_legal_sufficiency(request):
         form = LegalSufficiencyForm(request.POST)
         if form.is_valid():
             document = form.save(commit=False)
+            if request.POST.get('status') == 'published' and request.user.has_perm('app.legal_sufficiency_can_publish'):
+                document.publish()
+            elif request.POST.get('status') == 'published':
+                document.status = 'review'
+            print(request.POST.get('status'))
             document.attorney = request.user
             document.save()
             return redirect('home')
@@ -46,7 +51,7 @@ class LegalSufficiencyUpdate(UpdateView):
         self.document = form.save(commit=False)
         if self.request.POST.get('status') == 'published' and self.request.user.has_perm('app.legal_sufficiency_can_publish'):
             self.document.publish()
-        else:
+        elif self.request.POST.get('status') == 'published':
             self.document.status = 'review'
         self.document.save()
         return super(LegalSufficiencyUpdate, self).form_valid(form)
