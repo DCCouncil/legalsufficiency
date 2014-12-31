@@ -6,4 +6,4 @@ class LegalSufficiencyForm(forms.ModelForm):
     # status = forms.CharField(max_length=10, widget=forms.Select(choices=CHOICES))
     class Meta:
         model = LegalSufficiency
-        exclude = ['id','attorney','publish_date']
+        exclude = ['id','attorney','publish_date', 'slug']

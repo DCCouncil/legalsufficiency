@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from app.forms import LegalSufficiencyForm
 from app.models import LegalSufficiency
 from django.views.generic.edit import UpdateView, DeleteView
+from django.db import transaction
+
 # Create your views here.
 
 def home(request):
@@ -21,7 +23,7 @@ def view_sufficiencies(request):
     return render(request, 'view.html', {'sufficiencies':sufficiencies})
 
 def print_sufficiencies(request, pk):
-    sufficiency = LegalSufficiency.objects.get(id=pk)
+    sufficiency = LegalSufficiency.objects.get(slug=pk)
     return render(request, 'print.html', {'sufficiency':sufficiency})
 
 @login_required
@@ -30,25 +32,27 @@ def new_legal_sufficiency(request):
     if request.method == "POST":
         form = LegalSufficiencyForm(request.POST)
         if form.is_valid():
-            document = form.save(commit=False)
+            document = form.save()
             if request.POST.get('status') == 'published' and request.user.has_perm('app.legal_sufficiency_can_publish'):
                 document.publish()
             elif request.POST.get('status') == 'published':
                 document.status = 'review'
-            print(request.POST.get('status'))
             document.attorney = request.user
             document.save()
             return redirect('home')
+        else:
+            print("Something went wrong")
         return render(request,'app/new_legal_sufficiency.html', {'form':form, 'errors':form.errors})
     return render(request,'app/new_legal_sufficiency.html', {'form':form})
 
+@login_required
 class LegalSufficiencyUpdate(UpdateView):
     model = LegalSufficiency
     form_class = LegalSufficiencyForm
     success_url = '/'
 
     def form_valid(self, form):
-        self.document = form.save(commit=False)
+        self.document = form.save()
         if self.request.POST.get('status') == 'published' and self.request.user.has_perm('app.legal_sufficiency_can_publish'):
             self.document.publish()
         elif self.request.POST.get('status') == 'published':

@@ -14,6 +14,7 @@ div.header {
     font-weight: bold;
     border-bottom: solid 1px;
 }
+
 </style>
 {% endblock %}
 {% block content %}
@@ -23,7 +24,7 @@ div.header {
 <p>TO: {{sufficiency.get_office_display}}</p>
 <p>FROM: V. David Zvenyach, General Counsel</p>
 <p>DATE: {{sufficiency.publish_date|date:"F d, Y"}}</p>
-<p>RE: Legal Sufficiency Determination for {{sufficiency.get_measure_type}} {{sufficiency.measure_number}}, the {{sufficiency.short_title}}.</p>
+<p>RE: Legal Sufficiency Determination for {{sufficiency.get_measure_type_display}} {{sufficiency.measure_number}}, the {{sufficiency.short_title}}.</p>
 </div>
 
 {{sufficiency.content|safe}}

@@ -3,14 +3,10 @@ from django.contrib.auth.models import User
 import uuid
 from redactor.fields import RedactorField
 from datetime import date
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 # Create your models here.
-
-# class Office(models.Model):
-#     pass
-
-# class Request(models.Model):
-#     pass
 
 published = [('draft','Draft'), ('review','Review'),('published','Published')]
 m_type = [('B','Bill'),('PR','Proposed Resolution')]
@@ -18,8 +14,7 @@ m_type = [('B','Bill'),('PR','Proposed Resolution')]
 members = [('PM','Chairman Phil Mendelson'),('BN','Councilmember Brianne Nadeau'), ('JE','Councilmember Jack Evans'),('MC','Councilmember Mary Cheh'),('KM','Councilmember Kenyan McDuffie'),('CA','Councilmember Charles Allen'),('YA','Councilmember Yvette Alexander'),('VO','Councilmember Vincent Orange'),('AB','Councilmember Anita Bonds'),('DG','Councilmember David Grosso'),('ES','Councilmember Elissa Silverman')]
 
 class LegalSufficiency(models.Model):
-    id = models.CharField(max_length=64, primary_key=True, default=str(uuid.uuid1()))
-    # request = models.ForeignKey('Request', blank=True, null=True)
+    slug = models.SlugField(default=uuid.uuid4, primary_key=True)
     office = models.CharField(max_length=400, choices=members, default='pm')
     attorney = models.ForeignKey(User, blank=True, null=True)
     measure_type = models.CharField(max_length=5, choices=m_type, default='B')
@@ -33,10 +28,10 @@ class LegalSufficiency(models.Model):
         return '%s%s: %s' % (self.measure_type, self.measure_number, self.short_title)
 
     def get_absolute_url(self):
-        return '/suff/%s' % self.id
+        return '/suff/%s' % self.slug
 
     def get_public_url(self):
-        return '/view/%s' % self.id
+        return '/view/%s' % self.slug
 
     def publish(self):
         self.publish_date = date.today()
@@ -46,3 +41,8 @@ class LegalSufficiency(models.Model):
         permissions = ( 
             ( "can_publish", "Can Publish LSDs" ),
         )
+
+    # @receiver(pre_save)
+    # def set_uuid_on_save(sender, instance, *args, **kwargs):
+    #     if instance.uid is None:
+    #         instance.uid = str(uuid.uuid4())
