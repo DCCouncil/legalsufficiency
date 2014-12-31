@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrapform',
     'redactor',
+    'reversion',
     'app',
 )
 
@@ -50,6 +51,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'reversion.middleware.RevisionMiddleware',
 )
 
 ROOT_URLCONF = 'legalsuff.urls'
@@ -100,6 +102,6 @@ REDACTOR_UPLOAD = 'uploads/'
 LOGIN_REDIRECT_URL = '/'
 
 try:
-  from local_settings import *
+  from .local_settings import *
 except:
   pass

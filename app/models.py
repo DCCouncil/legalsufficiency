@@ -5,6 +5,7 @@ from redactor.fields import RedactorField
 from datetime import date
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+import reversion
 
 # Create your models here.
 
@@ -13,6 +14,7 @@ m_type = [('B','Bill'),('PR','Proposed Resolution')]
 
 members = [('PM','Chairman Phil Mendelson'),('BN','Councilmember Brianne Nadeau'), ('JE','Councilmember Jack Evans'),('MC','Councilmember Mary Cheh'),('KM','Councilmember Kenyan McDuffie'),('CA','Councilmember Charles Allen'),('YA','Councilmember Yvette Alexander'),('VO','Councilmember Vincent Orange'),('AB','Councilmember Anita Bonds'),('DG','Councilmember David Grosso'),('ES','Councilmember Elissa Silverman')]
 
+@reversion.register
 class LegalSufficiency(models.Model):
     slug = models.SlugField(default=uuid.uuid4, primary_key=True)
     office = models.CharField(max_length=400, choices=members, default='pm')

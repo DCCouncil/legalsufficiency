@@ -4,7 +4,7 @@ from django.test import TestCase
 from app.models import LegalSufficiency as ls
 
 class TestSufficiencies(TestCase):
-    fixtures = ['users.yaml','lsds.yaml']
+    fixtures = ['lsds.yaml']
 
     def setUp(self):
         # call_setup_methods()

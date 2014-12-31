@@ -4,6 +4,7 @@ from app.forms import LegalSufficiencyForm
 from app.models import LegalSufficiency
 from django.views.generic.edit import UpdateView, DeleteView
 from django.db import transaction
+import reversion
 
 # Create your views here.
 
@@ -27,6 +28,7 @@ def print_sufficiencies(request, pk):
     return render(request, 'print.html', {'sufficiency':sufficiency})
 
 @login_required
+@reversion.create_revision()
 def new_legal_sufficiency(request):
     form = LegalSufficiencyForm()
     if request.method == "POST":
@@ -47,7 +49,8 @@ class LegalSufficiencyUpdate(UpdateView):
     model = LegalSufficiency
     form_class = LegalSufficiencyForm
     success_url = '/'
-
+    
+    @reversion.create_revision()
     def form_valid(self, form):
         self.document = form.save()
         if self.request.POST.get('status') == 'published' and self.request.user.has_perm('app.legal_sufficiency_can_publish'):
