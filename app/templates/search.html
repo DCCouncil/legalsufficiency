@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Search Legal Sufficiencies</h1>
+    <form action="" method="get">
+        <div class="flakes-search">
+        <input name="q" class="search-box" placeholder="Search" autofocus>
+        </div>
+    </form>
+    <h2>Results</h2>
+    <div id="results">
+    <ul>
+    {% for r in results %}
+    <li><a href="{{r.get_public_url}}">{{r}}</a></li>
+    {% endfor %}
+    </ul>
+    </div>
+{% endblock %}

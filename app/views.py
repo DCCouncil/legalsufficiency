@@ -5,6 +5,10 @@ from app.models import LegalSufficiency
 from django.views.generic.edit import UpdateView, DeleteView
 from django.db import transaction
 import reversion
+from django.http import HttpResponse
+from django.core.serializers.json import DjangoJSONEncoder
+import json
+from django.db.models import Q
 
 # Create your views here.
 
@@ -26,6 +30,26 @@ def view_sufficiencies(request):
 def print_sufficiencies(request, pk):
     sufficiency = LegalSufficiency.objects.get(slug=pk)
     return render(request, 'print.html', {'sufficiency':sufficiency})
+
+def published_query(request):
+    data = LegalSufficiency.objects.all().values('slug', 'office', 'measure_number', 'measure_type', 'short_title', 'content', 'publish_date')
+    # Allow full-text search against content/short_title
+    if request.GET.__contains__('q'):
+        q = request.GET['q']
+        query = Q(content__icontains=q) | Q(short_title__icontains=q)
+        data = data.filter(query)
+    data = data.filter(status="published")
+    return HttpResponse(json.dumps(list(data), cls=DjangoJSONEncoder),content_type='application/json')
+
+def search(request):
+    if request.GET.__contains__('q'):   
+        q = request.GET.get('q') 
+        data = LegalSufficiency.objects.all()#.values('slug', 'office', 'measure_number', 'measure_type', 'short_title', 'content', 'publish_date')
+        query = Q(content__icontains=q) | Q(short_title__icontains=q)
+        data = data.filter(query)
+        data = data.filter(status="published")
+        return render(request, 'search.html', {'results': data})
+    return render(request, 'search.html', {})
 
 @login_required
 @reversion.create_revision()

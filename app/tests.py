@@ -7,6 +7,7 @@ class TestSufficiencies(TestCase):
     fixtures = ['lsds.yaml']
 
     def setUp(self):
+        from django.conf import settings
         # call_setup_methods()
         pass
     
@@ -15,3 +16,6 @@ class TestSufficiencies(TestCase):
         print("There are 7 sufficiencies in the database")
         lsds = ls.objects.all()
         self.assertEqual(len(lsds), 7)
+
+    def test_load_index(self):
+        pass
