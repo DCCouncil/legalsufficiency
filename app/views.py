@@ -14,9 +14,9 @@ from django.db.models import Q
 
 def home(request):
     query = LegalSufficiency.objects.all()
-    in_draft = query.filter(status='draft')
-    pending = query.filter(status='review')
-    final = query.filter(status='published')[:5]
+    in_draft = query.filter(status='draft').order_by('measure_type', 'measure_number')
+    pending = query.filter(status='review').order_by('measure_type', 'measure_number')
+    final = query.filter(status='published').order_by('-publish_date')[:5]
     return render(request,'home.html', {'draft':in_draft, 'pending':pending, 'final':final})
 
 ###

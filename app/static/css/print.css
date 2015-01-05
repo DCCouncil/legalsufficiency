@@ -17,7 +17,8 @@ body {
 }
 
 div.header {
-	    max-height: 1in;
+    content:url(/static/img/dcseal.jpg);
+    max-height: 1in;
 }
 
 h1 {
