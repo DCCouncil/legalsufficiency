@@ -17,7 +17,6 @@
     }
 } 
 
-
 div.header {
     display: block;
     margin: 0 auto;
@@ -32,7 +31,18 @@ div.header {
 {% endblock %}
 {% block content %}
 <div class="header"></div>
-<div id="qr"></div>
+{% if perms.app.legal_sufficiency_can_publish %}
+<style>
+@media screen {
+    div#sig {
+        display: none;
+    }
+}
+</style>
+<div id="sig">
+<img src="{{stamp_url}}" style="position:absolute; top:2in; left:3.5in; width:1.5in">
+</div>
+{% endif %}
 <h1>Memorandum</h1>
 <div id="front_matter">
 <p>TO: {{sufficiency.get_office_display}}</p>

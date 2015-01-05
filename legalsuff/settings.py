@@ -101,6 +101,8 @@ REDACTOR_UPLOAD = 'uploads/'
 
 LOGIN_REDIRECT_URL = '/'
 
+STAMP_URL = os.environ.get('STAMP_URL')
+
 try:
   from .local_settings import *
 except:

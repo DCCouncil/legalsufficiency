@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 from django.db.models import Q
+from django.conf import settings
 
 # Create your views here.
 
@@ -29,7 +30,7 @@ def view_sufficiencies(request):
 
 def print_sufficiencies(request, pk):
     sufficiency = LegalSufficiency.objects.get(slug=pk)
-    return render(request, 'print.html', {'sufficiency':sufficiency})
+    return render(request, 'print.html', {'sufficiency':sufficiency, 'stamp_url':settings.STAMP_URL})
 
 def published_query(request):
     data = LegalSufficiency.objects.all().values('slug', 'office', 'measure_number', 'measure_type', 'short_title', 'content', 'publish_date')
