@@ -9,13 +9,13 @@
 <h1>Legal Sufficiencies</h1>
 <div class="grid-1">
     <div class="span-1"><h2>Approved Legal Sufficiency Determinations</h2>
-    <table id="draft" class="flakes-table">
+    <table id="approved" class="flakes-table">
     <thead>
-    <tr><td>Measure</td><td>Short Title</td></tr>
+    <tr><td>Measure</td><td>Short Title</td><td>Publication Date</td></tr>
     </thead>
     <tbody>
     {% for suff in sufficiencies %}
-        <tr><td><a href="{{suff.get_public_url}}">{{suff.measure_type}}{{suff.measure_number}}</a></td><td>{{suff.short_title}}</td></tr>
+        <tr><td><a href="{{suff.get_public_url}}">{{suff.measure_type}}{{suff.measure_number}}</a></td><td>{{suff.short_title}}</td><td>{{suff.publish_date}}</td></tr>
     {% endfor %}
     </tbody>
     </table>
@@ -28,9 +28,7 @@
 <script src="{% static 'bower_components/datatables/media/js/jquery.dataTables.min.js' %}"></script>
 <script>
 $(document).ready(function(){
-    $('#draft').DataTable();
-    $('#pending').DataTable();
-    $('#approved').DataTable();
+    $('#approved').DataTable({'order':[2,'desc']);
 });
 </script>
 {% endblock %}

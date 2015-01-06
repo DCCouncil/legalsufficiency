@@ -25,7 +25,7 @@ def home(request):
 ###
 
 def view_sufficiencies(request):
-    sufficiencies = LegalSufficiency.objects.all().filter(status='published')
+    sufficiencies = LegalSufficiency.objects.all().order_by('-publish_date').filter(status='published')
     return render(request, 'view.html', {'sufficiencies':sufficiencies})
 
 def print_sufficiencies(request, pk):
