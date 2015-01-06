@@ -7,3 +7,7 @@ class LegalSufficiencyForm(forms.ModelForm):
     class Meta:
         model = LegalSufficiency
         exclude = ['id','attorney','publish_date', 'slug']
+
+        widgets = {
+            'amendment_number': forms.TextInput(attrs={'class': 'hidden'}),
+        }

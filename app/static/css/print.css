@@ -1,8 +1,13 @@
 @page {
+	size: 8.5in 11in;
 	margin-left: 1.5in;
 	margin-right: 1.5in;
 	margin-top: 0.5in;
 	margin-bottom: 1in;
+
+	@top-left {
+	    content: "Hamlet";
+	}
 }
 
 body {
@@ -14,11 +19,6 @@ body {
 #front_matter {
 	font-weight: bold;
 	border-bottom: solid 1px;
-}
-
-div.header {
-    content:url(/static/img/dcseal.jpg);
-    max-height: 1in;
 }
 
 h1 {

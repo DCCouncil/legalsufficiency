@@ -4,22 +4,10 @@
 <link rel="stylesheet" href="{% static 'css/print.css' %}" type="text/css" media="print" />
 <style type="text/css">
 
-@media print {
-    div.header {
-        content:url(/static/img/dcseal.jpg);
-        max-height: 1in;
-    }
-} 
-
-@media screen {
-    div.header {
-        content:url(/static/img/dcseal.png);
-    }
-} 
-
 div.header {
     display: block;
     margin: 0 auto;
+    text-align: center;
 }
 
 #front_matter {
@@ -30,7 +18,7 @@ div.header {
 </style>
 {% endblock %}
 {% block content %}
-<div class="header"></div>
+<div class="header"><img src="https://legalsuff.herokuapp.com/static/img/dcseal.jpg" style="max-height:1in;"></div>
 {% if perms.app.legal_sufficiency_can_publish %}
 <style>
 @media screen {
@@ -48,7 +36,7 @@ div.header {
 <p>TO: {{sufficiency.get_office_display}}</p>
 <p>FROM: V. David Zvenyach, General Counsel</p>
 <p>DATE: {{sufficiency.publish_date|date:"F d, Y"}}</p>
-<p>RE: Legal Sufficiency Determination for {{sufficiency.get_measure_type_display}} {{sufficiency.measure_number}}, the {{sufficiency.short_title}}.</p>
+<p>RE: Legal Sufficiency Determination for {{sufficiency.get_title}}.</p>
 </div>
 
 {{sufficiency.content|safe}}

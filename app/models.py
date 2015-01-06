@@ -22,6 +22,8 @@ class LegalSufficiency(models.Model):
     measure_type = models.CharField(max_length=5, choices=m_type, default='B')
     measure_number = models.CharField(max_length=64, null=True, blank=True)
     short_title = models.CharField(max_length=300, null=True, blank=True)
+    amendment = models.BooleanField(default=False)
+    amendment_number = models.PositiveSmallIntegerField(null=True, blank=True)
     status = models.CharField(max_length=10, choices=published, default='draft')
     content = RedactorField(verbose_name=u'Content')
     publish_date = models.DateField(blank=True, null=True)
@@ -38,6 +40,18 @@ class LegalSufficiency(models.Model):
     def publish(self):
         self.publish_date = date.today()
         self.status = 'published'
+
+    def get_title(self):
+        if self.measure_number != None and self.amendment and self.amendment_number != None:
+            return 'Amendment #%s to %s %s, the %s' % (self.amendment_number, self.get_measure_type_display(), self.measure_number, self.short_title)
+        elif self.measure_number != None and self.amendment:
+            return 'Amendment to %s %s, the %s' % (self.get_measure_type_display(), self.measure_number, self.short_title)
+        elif self.measure_number != None:
+            return '%s %s, the %s' % (self.get_measure_type_display(), self.measure_number, self.short_title)
+        elif self.amendment:
+            return 'Amendment to the %s' % (self.short_title)
+        else: 
+            return 'the %s' % (self.short_title)
 
     class Meta:
         permissions = ( 
