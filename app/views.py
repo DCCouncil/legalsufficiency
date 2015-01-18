@@ -10,6 +10,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 import json
 from django.db.models import Q
 from django.conf import settings
+from django.utils.html import escape
 
 # Create your views here.
 
@@ -19,6 +20,30 @@ def home(request):
     pending = query.filter(status='review').order_by('measure_type', 'measure_number')
     final = query.filter(status='published').order_by('-publish_date')[:5]
     return render(request,'home.html', {'draft':in_draft, 'pending':pending, 'final':final})
+
+from django.contrib.syndication.views import Feed
+from django.core.urlresolvers import reverse
+from django.utils.feedgenerator import Rss201rev2Feed
+
+class LatestEntriesFeed(Feed):
+    title = "Legal Sufficiencies -- Council of the District of Columbia"
+    link = "https://legalsuff.herokuapp.com/"
+    description = "Legal Sufficiency Determinations for the Council of the District of Columbia."
+
+    feed_type = Rss201rev2Feed
+
+    def items(self):
+        return LegalSufficiency.objects.order_by('-publish_date')[:20]
+
+    def item_title(self, item):
+        return item.short_title
+
+    def item_description(self, item):
+        return item.content
+
+    # item_link is only needed if NewsItem has no get_absolute_url method.
+    def item_link(self, item):
+        return item.get_public_url()
 
 ###
 # Create a new Document
