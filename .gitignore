@@ -5,3 +5,5 @@ env
 __pycache__
 db.sqlite3
 local_settings.py
+_initial_data.json
+npm-debug.log
