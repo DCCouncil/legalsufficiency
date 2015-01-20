@@ -9,3 +9,6 @@ python:
 install: "pip install -r requirements.txt"
 # command to run tests
 script: python manage.py test
+
+# Environmental Variables
+env: SECRET_KEY='test_secret_key'
