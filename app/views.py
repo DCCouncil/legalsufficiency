@@ -55,6 +55,8 @@ def view_sufficiencies(request):
 
 def print_sufficiencies(request, pk):
     sufficiency = LegalSufficiency.objects.get(slug=pk)
+    if sufficiency.status != "published":
+        return redirect('/')
     return render(request, 'print.html', {'sufficiency':sufficiency, 'stamp_url':settings.STAMP_URL})
 
 @login_required
