@@ -57,6 +57,11 @@ def print_sufficiencies(request, pk):
     sufficiency = LegalSufficiency.objects.get(slug=pk)
     return render(request, 'print.html', {'sufficiency':sufficiency, 'stamp_url':settings.STAMP_URL})
 
+@login_required
+def preview_sufficiencies(request, pk):
+    sufficiency = LegalSufficiency.objects.get(slug=pk)
+    return render(request, 'print.html', {'sufficiency':sufficiency, 'stamp_url':settings.STAMP_URL})
+
 def published_query(request):
     data = LegalSufficiency.objects.all().values('slug', 'office', 'measure_number', 'measure_type', 'short_title', 'content', 'publish_date')
     # Allow full-text search against content/short_title

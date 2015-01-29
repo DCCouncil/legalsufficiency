@@ -4,14 +4,18 @@
 {% if errors %}
 {{errors}}
 {% endif %}
-<fieldset><legend>Legal Sufficiency</legend><form method="POST">
+<div="error-div">
+</div>
+<fieldset><legend>Legal Sufficiency</legend><form id="form" method="POST">
 {% csrf_token %}
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> 
 {{ form.media }}
 {{ form.as_p }}
-<button type="submit" class="button-green">Submit</button>
+<button id="submit" type="submit" class="button-green">Submit</button>
 </form>
 </fieldset>
+
+<!-- <button id="preview" type="button" class="btn btn-info">Preview Sufficiency</button> -->
 {% endblock %}
 
 {% block extra_js %}

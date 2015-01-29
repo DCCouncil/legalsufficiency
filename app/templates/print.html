@@ -36,14 +36,18 @@ div.header {
 <p>TO: {{sufficiency.get_office_display}}</p>
 <p>FROM: V. David Zvenyach, General Counsel</p>
 <p>DATE: {{sufficiency.publish_date|date:"F d, Y"}}</p>
-<p>RE: Legal Sufficiency Determination for {{sufficiency.get_title}}.</p>
+<p>RE: Legal Sufficiency Determination for {{sufficiency.get_title}}</p>
 </div>
 
 {{sufficiency.content|safe}}
 
-</div>
 {% endblock %}
 
 {% block extra_js %}
-
+<script>
+$(document).ready(function () {
+    $(".flakes-navigation").height(0)
+    $(".flakes-navigation").height(0)
+}
+</script>
 {% endblock %}

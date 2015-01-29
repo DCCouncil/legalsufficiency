@@ -42,11 +42,11 @@ class LegalSufficiency(models.Model):
         self.status = 'published'
 
     def get_title(self):
-        if self.measure_number != None and self.amendment and self.amendment_number != None:
+        if self.measure_number != "" and self.amendment and self.amendment_number != None:
             return 'Amendment #%s to %s %s, the %s' % (self.amendment_number, self.get_measure_type_display(), self.measure_number, self.short_title)
-        elif self.measure_number != None and self.amendment:
+        elif self.measure_number != "" and self.amendment:
             return 'Amendment to %s %s, the %s' % (self.get_measure_type_display(), self.measure_number, self.short_title)
-        elif self.measure_number != None:
+        elif self.measure_number != "":
             return '%s %s, the %s' % (self.get_measure_type_display(), self.measure_number, self.short_title)
         elif self.amendment:
             return 'Amendment to the %s' % (self.short_title)
