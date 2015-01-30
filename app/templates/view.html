@@ -15,7 +15,7 @@
     </thead>
     <tbody>
     {% for suff in sufficiencies %}
-        <tr><td>{% if user.is_staff %}<a href="/suff/{{suff.slug}}"><button type="button" class="button-blue tiny">Edit</button></a> {% endif %}<a href="{{suff.get_public_url}}">{{suff.measure_type}}{{suff.measure_number}}</a></td><td>{{suff.short_title}}</td><td>{{suff.publish_date}}</td></tr>
+        <tr><td><a href="{{suff.get_public_url}}">{{suff.measure_type}}{{suff.measure_number}}</a></td><td>{{suff.short_title}} {% if user.is_staff %}<a href="/suff/{{suff.slug}}"><button type="button" class="button-blue tiny">Edit</button></a> {% endif %}</td><td>{{suff.publish_date}}</td></tr>
     {% endfor %}
     </tbody>
     </table>
