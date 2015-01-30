@@ -33,7 +33,7 @@ class LatestEntriesFeed(Feed):
     feed_type = Rss201rev2Feed
 
     def items(self):
-        return LegalSufficiency.objects.order_by('-publish_date')[:20]
+        return LegalSufficiency.objects.filter(status='published').(order_by('-publish_date')[:20]
 
     def item_title(self, item):
         return item.short_title
