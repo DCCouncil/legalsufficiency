@@ -15,7 +15,13 @@
     </thead>
     <tbody>
     {% for suff in sufficiencies %}
+        {% if suff.private %}
+        {% if user.is_staff %}
         <tr><td><a href="{{suff.get_public_url}}">{{suff.measure_type}}{{suff.measure_number}}</a></td><td>{{suff.short_title}} {% if user.is_staff %}<a href="/suff/{{suff.slug}}"><button type="button" class="button-blue tiny">Edit</button></a> {% endif %}</td><td>{{suff.publish_date}}</td></tr>
+        {% endif %}
+        {% else %}
+        <tr><td><a href="{{suff.get_public_url}}">{{suff.measure_type}}{{suff.measure_number}}</a></td><td>{{suff.short_title}} {% if user.is_staff %}<a href="/suff/{{suff.slug}}"><button type="button" class="button-blue tiny">Edit</button></a> {% endif %}</td><td>{{suff.publish_date}}</td></tr>
+        {% endif %}
     {% endfor %}
     </tbody>
     </table>
@@ -28,7 +34,7 @@
 <script src="{% static 'bower_components/datatables/media/js/jquery.dataTables.min.js' %}"></script>
 <script>
 $(document).ready(function(){
-    $('#approved').DataTable({'order':[2,'desc']);
+    $('#approved').DataTable({'order':[2,'desc']});
 });
 </script>
 {% endblock %}

@@ -28,6 +28,7 @@ class LegalSufficiency(models.Model):
     content = RedactorField(verbose_name=u'Content')
     publish_date = models.DateField(blank=True, null=True)
     signator = models.CharField(max_length=50, blank=True, null=True)
+    private = models.BooleanField(default=False)
 
     def __str__(self):
         return '%s%s: %s' % (self.measure_type, self.measure_number, self.short_title)
