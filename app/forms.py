@@ -6,7 +6,7 @@ class LegalSufficiencyForm(forms.ModelForm):
     # status = forms.CharField(max_length=10, widget=forms.Select(choices=CHOICES))
     class Meta:
         model = LegalSufficiency
-        exclude = ['id','attorney','publish_date', 'slug']
+        exclude = ['id','attorney','publish_date', 'slug','signator']
 
         widgets = {
             'amendment_number': forms.TextInput(attrs={'class': 'hidden'}),

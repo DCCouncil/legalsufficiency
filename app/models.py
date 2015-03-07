@@ -11,7 +11,7 @@ import reversion
 
 published = [('draft','Draft'), ('review','Review'),('published','Published')]
 m_type = [('B','Bill'),('PR','Proposed Resolution')]
-
+signator = "John Hoellen, Acting General Counsel"
 members = [('PM','Chairman Phil Mendelson'),('BN','Councilmember Brianne Nadeau'), ('JE','Councilmember Jack Evans'),('MC','Councilmember Mary Cheh'),('KM','Councilmember Kenyan McDuffie'),('CA','Councilmember Charles Allen'),('YA','Councilmember Yvette Alexander'),('VO','Councilmember Vincent Orange'),('AB','Councilmember Anita Bonds'),('DG','Councilmember David Grosso'),('ES','Councilmember Elissa Silverman')]
 
 @reversion.register
@@ -27,6 +27,7 @@ class LegalSufficiency(models.Model):
     status = models.CharField(max_length=10, choices=published, default='draft')
     content = RedactorField(verbose_name=u'Content')
     publish_date = models.DateField(blank=True, null=True)
+    signator = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return '%s%s: %s' % (self.measure_type, self.measure_number, self.short_title)
@@ -40,6 +41,7 @@ class LegalSufficiency(models.Model):
     def publish(self):
         self.publish_date = date.today()
         self.status = 'published'
+        self.signator = signator
 
     def get_title(self):
         if self.measure_number != "" and self.amendment and self.amendment_number != None:
