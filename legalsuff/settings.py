@@ -101,7 +101,7 @@ MEDIA_ROOT = 'media'
 MEDIA_URL = '/media/'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-REDACTOR_OPTIONS = {'lang': 'en'}
+REDACTOR_OPTIONS = {'lang': 'en', 'cleanOnPaste': 'true'}
 REDACTOR_UPLOAD = 'uploads/'
 
 LOGIN_REDIRECT_URL = '/'
